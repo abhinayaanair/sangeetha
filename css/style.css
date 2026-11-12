@@ -226,7 +226,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   position: relative;
   min-height: 100svh;
   display: flex; flex-direction: column; justify-content: center;
-  padding: 120px 0 90px;
+  padding: 92px 0 64px;
   background: var(--plum-950);
   color: #f3eefa;
   overflow: hidden;
@@ -256,34 +256,34 @@ button { font: inherit; color: inherit; cursor: pointer; }
 @keyframes sway { from { transform: rotate(-1.2deg); } to { transform: rotate(1.2deg); } }
 
 .hero__inner { display: grid; grid-template-columns: 1.35fr .8fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
-.hero__kicker { font-family: var(--serif); font-style: italic; font-size: clamp(1.4rem, 2.4vw, 2rem); color: #e8e0f3; margin: 0 0 .1em; }
+.hero__kicker { font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, min(2.4vw, 3.6vh), 2rem); color: #e8e0f3; margin: 0 0 .1em; }
 .hero__title {
   font-family: var(--serif);
-  font-size: clamp(3.4rem, 9.5vw, 7.6rem);
+  font-size: clamp(3.2rem, min(9.5vw, 13.5vh), 7.6rem);
   line-height: .95;
   letter-spacing: -.035em;
   font-weight: 400;
   color: var(--lav-300);
-  margin: 0 0 .32em;
+  margin: 0 0 .22em;
 }
 .hero__title em { color: var(--lav-400); }
-.hero__sub { font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 2.2vw, 1.85rem); margin: 0 0 .7em; color: #f3eefa; }
-.hero__roles { font-size: .8rem; letter-spacing: .26em; text-transform: uppercase; color: #cfc6dc; margin-bottom: 1.1em; }
+.hero__sub { font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem, min(2.2vw, 3.4vh), 1.85rem); margin: 0 0 .5em; color: #f3eefa; }
+.hero__roles { font-size: .8rem; letter-spacing: .26em; text-transform: uppercase; color: #cfc6dc; margin-bottom: .8em; }
 .hero__roles span { color: var(--lav-400); margin: 0 .3em; }
-.hero__lead { color: #bdb3cc; max-width: 46ch; }
-.sparkle-rule { display: flex; align-items: center; gap: 18px; color: var(--lav-300); margin: 1.8em 0; }
+.hero__lead { color: #bdb3cc; max-width: 46ch; margin-bottom: 0; }
+.sparkle-rule { display: flex; align-items: center; gap: 18px; color: var(--lav-300); margin: clamp(14px, 3vh, 30px) 0; }
 .sparkle-rule span { width: 70px; height: 1px; background: currentColor; opacity: .5; }
 .hero__quote {
-  margin: 0 0 2.2rem;
+  margin: 0 0 clamp(18px, 3.6vh, 36px);
   font-family: var(--serif); font-style: italic;
-  font-size: clamp(1.25rem, 2.1vw, 1.7rem);
+  font-size: clamp(1.1rem, min(2.1vw, 3vh), 1.7rem);
   line-height: 1.42;
   color: #f6f1fb;
-  max-width: 30ch;
+  max-width: 34ch;
 }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
-.hero__portrait { position: relative; margin: 0; justify-self: end; width: min(100%, 400px); }
+.hero__portrait { position: relative; margin: 0; justify-self: end; width: min(100%, 400px, calc((100svh - 190px) / 1.43)); }
 .arch {
   position: relative;
   border-radius: 999px 999px 26px 26px;
@@ -719,7 +719,9 @@ details ul { margin-top: 10px !important; }
 .polaroid:nth-child(even) { margin-top: 46px; }
 .polaroid:hover { transform: rotate(0) scale(1.08) translateY(-8px); z-index: 5; }
 .polaroid img { aspect-ratio: 4 / 5; object-fit: cover; object-position: var(--pos, 50% 50%); width: 100%; }
+.polaroid { z-index: 1; }
 .polaroid--front { z-index: 3; }
+.polaroid--back { z-index: 0; }
 .polaroid span { position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; font-family: var(--hand); font-size: 1.3rem; color: var(--ink); }
 
 .hobby-duo { display: grid; grid-template-columns: 1.2fr 1fr; gap: 22px; margin-bottom: 110px; }
