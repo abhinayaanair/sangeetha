@@ -38,7 +38,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip; }
 body {
   margin: 0;
   font-family: var(--sans);
@@ -648,7 +648,7 @@ details ul { margin-top: 10px !important; }
 .quote figcaption time { font-size: .78rem; color: #8f86a0; margin-top: 2px; }
 .quote__echo { margin-top: 14px; display: grid; gap: 8px; }
 .quote__echo p { margin: 0; font-size: .9rem; color: #4b4256; background: var(--paper); border-radius: 12px; padding: 10px 14px; }
-.quote__echo b { font-weight: 500; color: var(--ink-soft); font-size: .82rem; white-space: nowrap; }
+.quote__echo b { display: block; margin-top: 4px; font-weight: 500; color: var(--ink-soft); font-size: .82rem; }
 .quote__wins { display: flex; flex-wrap: wrap; gap: 6px; margin: -4px 0 18px; }
 .quote__wins li { font-size: .78rem; padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, var(--c) 22%, transparent); }
 .quote__src { display: inline-block; margin-top: 14px; font-size: .82rem; color: var(--violet-700); text-decoration: none; border-bottom: 1px solid var(--lav-400); }
