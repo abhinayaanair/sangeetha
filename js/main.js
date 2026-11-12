@@ -89,25 +89,28 @@
     io.observe(el);
   });
 
-  /* ---------- Tabs (Chapter 4) ---------- */
-  const tabs = $$('[role="tab"]');
-  function selectTab(tab) {
-    tabs.forEach(t => {
-      const on = t === tab;
-      t.setAttribute('aria-selected', on);
-      t.tabIndex = on ? 0 : -1;
-      $('#' + t.getAttribute('aria-controls')).hidden = !on;
-    });
+  /* ---------- Timeline filters (Chapter 3) ---------- */
+  const filters = $$('[data-filter]');
+  const stops = $$('.journey .stop');
+  function applyFilter(kind) {
+    filters.forEach(b => b.setAttribute('aria-pressed', b.dataset.filter === kind));
+    stops.forEach(s => { s.hidden = kind !== 'all' && s.dataset.kind !== kind; });
+    // alternate left/right across the stops that are actually showing
+    stops.filter(s => !s.hidden).forEach((s, i) => { s.dataset.side = i % 2 ? 'l' : 'r'; });
     buildJourneys();
   }
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => selectTab(t));
-    t.addEventListener('keydown', e => {
-      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-      if (!d) return;
-      const next = tabs[(i + d + tabs.length) % tabs.length];
-      next.focus(); selectTab(next);
-    });
+  filters.forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.filter)));
+
+  // "(2 Years 6 months)" for roles that are still running
+  $$('[data-since]').forEach(el => {
+    const [y, m] = el.dataset.since.split('-').map(Number);
+    const now = new Date();
+    const total = (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - m);
+    const yrs = Math.floor(total / 12), mos = total % 12;
+    const parts = [];
+    if (yrs) parts.push(`${yrs} Year${yrs > 1 ? 's' : ''}`);
+    if (mos) parts.push(`${mos} month${mos > 1 ? 's' : ''}`);
+    if (parts.length) el.textContent = `(${parts.join(' ')})`;
   });
 
   /* ---------- Winding journey path ---------- */
@@ -128,7 +131,7 @@
       list.prepend(svg);
     }
     const box = list.getBoundingClientRect();
-    const pts = $$('.stop__node', list).map(n => {
+    const pts = $$('.stop:not([hidden]) .stop__node', list).map(n => {
       const r = n.getBoundingClientRect();
       return [r.left - box.left + r.width / 2, r.top - box.top + r.height / 2];
     });
@@ -368,6 +371,7 @@
   /* ---------- Init ---------- */
   $('#year').textContent = new Date().getFullYear();
   buildGraph();
+  applyFilter('all');
   addEventListener('load', buildJourneys);
   buildJourneys();
   onScroll();
