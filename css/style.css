@@ -798,6 +798,8 @@ details ul { margin-top: 10px !important; }
 /* ---------- Lightbox ---------- */
 .lightbox { position: fixed; inset: 0; z-index: 90; background: rgba(12, 9, 17, .92); display: grid; place-items: center; padding: 60px 16px 30px; animation: fade .3s; }
 .lightbox[hidden] { display: none; }
+.toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 200; max-width: calc(100vw - 32px); padding: 12px 20px; border-radius: 999px; background: var(--plum-900); border: 1px solid var(--lav-400); color: #fff; font-size: .92rem; box-shadow: 0 10px 30px rgba(0,0,0,.25); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 .lightbox figure { margin: 0; max-width: min(1200px, 100%); text-align: center; }
 .lightbox img { max-height: 80vh; width: auto; margin: 0 auto; border-radius: 10px; box-shadow: 0 30px 80px rgba(0,0,0,.6); background: #fff; }
 .lightbox figcaption { color: #e6dff0; margin-top: 14px; font-family: var(--hand); font-size: 1.6rem; }

@@ -339,6 +339,27 @@
     });
   }
 
+  /* ---------- Email links: also copy the address ----------
+     mailto: does nothing visible when no mail app is set up (e.g. Gmail-in-browser users),
+     so copy the address and say so. The mail app still opens if there is one. */
+  let toastTimer;
+  function toast(msg) {
+    let t = $('.toast');
+    if (!t) { t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status'); document.body.append(t); }
+    t.textContent = msg;
+    t.classList.add('is-on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('is-on'), 3200);
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="mailto:"]');
+    if (!a) return;
+    const email = decodeURIComponent(a.getAttribute('href').slice(7).split('?')[0]);
+    const done = () => toast(`Email address copied: ${email}`);
+    if (navigator.clipboard) navigator.clipboard.writeText(email).then(done, () => toast(email));
+    else toast(email);
+  });
+
   /* ---------- Lightbox ---------- */
   const lb = $('#lightbox');
   const lbImg = $('img', lb);
