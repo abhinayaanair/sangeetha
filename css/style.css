@@ -121,6 +121,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   transition: transform .3s var(--ease), background .3s, box-shadow .3s, border-color .3s;
   white-space: nowrap;
 }
+.btn[hidden] { display: none; }
 .btn span { transition: transform .3s var(--ease); }
 .btn:hover span { transform: translateX(4px); }
 .btn--lav { background: var(--lav-400); color: var(--plum-900); box-shadow: 0 10px 30px -12px rgba(195, 174, 240, .8); }
